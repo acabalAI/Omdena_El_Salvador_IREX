@@ -4,7 +4,7 @@ from src.agents.decision_agent import DecisionAgent
 from src.agents.filter_agent import FilterAgent
 from src.agents.headline_agent import HeadlineAgent
 # Assuming load_pipeline is implemented to load the model
-from src.ml_models.ml_pipeline import build_and_train_pipeline
+from src.ml_models.ml_pipeline import load_pipeline
 from src.utils.info_extraction import *
 from src.utils.token_controler import *
 
@@ -42,11 +42,7 @@ news = limit_tokens(news)
 if st.button("Verificar"):
     # Begin verification process
     st.write("Verificando...")
-    file_path_train = './src/data_processing/train_dataset.xlsx'
-
-    df_train = pd.read_excel(file_path_train)
-    df_train["total_text"] = df_train['Text']
-    ml_pipeline = build_and_train_pipeline(df_train["total_text"], df_train["Category"])
+    ml_pipeline = load_pipeline(filename='src/ml_models/saved_models/ml_model_pipeline.joblib')
     
     predicted_category = ml_pipeline.predict([news])  # Use the news directly or another appropriate variable
     predicted_probability = ml_pipeline.predict_proba([news])[0][1]
