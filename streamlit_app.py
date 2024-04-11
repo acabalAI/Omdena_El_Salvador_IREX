@@ -7,6 +7,7 @@ from src.agents.headline_agent import HeadlineAgent
 from src.ml_models.ml_pipeline import load_pipeline
 from src.utils.info_extraction import *
 from src.utils.token_controler import *
+from serpapi import GoogleSearch
 
 from dotenv import load_dotenv
 import os
